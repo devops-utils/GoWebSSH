@@ -29,6 +29,7 @@ sudo docker exec -it webssh bash
 sudo docker logs -f webssh
 
 sqlite3 .GoWebSSH/GoWebSSH.db
+sqlite3 docker/data/.GoWebSSH/GoWebSSH.db
 ```
 
 ```shell
