@@ -37,16 +37,12 @@ export default defineConfig({
       "/api": {
         // 代理目标地址
         target: "http://49.232.6.131:8031",
-
         // websocket 
         ws: true,
-
         // 支持https
         secure: false,
-
         // 是否允许不同源
         changeOrigin: true,
-
       },
     },
   },
