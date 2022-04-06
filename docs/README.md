@@ -31,4 +31,6 @@ sudo docker logs -f webssh
 
 ```shell
 https://nodejs.org/zh-cn/docs/guides/nodejs-docker-webapp/
+https://www.cnblogs.com/super-lulu/p/11741591.html
+http://nginx.org/en/docs/http/ngx_http_auth_request_module.html
 ```
