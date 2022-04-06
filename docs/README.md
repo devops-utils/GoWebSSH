@@ -12,4 +12,6 @@ sudo docker-compose up webssh
 sudo docker-compose up -d webssh
 sudo docker-compose stop webssh
 sudo docker-compose rm webssh
+
+sudo docker exec -it webssh bash
 ```
