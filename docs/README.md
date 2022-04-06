@@ -4,6 +4,7 @@ cnpm install
 npm run build
 
 sudo docker run -ti --volume="$(pwd)":/webssh --rm node:16 bash
+sudo docker run -ti --volume="$(pwd)":/webssh --rm node:14 bash
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install
 npm run build
