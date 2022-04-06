@@ -1,6 +1,6 @@
 FROM golang
 
-WORKDIR /home/web
+WORKDIR /home/webssh
 
 COPY gossh .
 

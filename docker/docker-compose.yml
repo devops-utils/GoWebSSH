@@ -1,0 +1,14 @@
+version: '3'
+services:
+  webssh:
+    build:
+      context: webssh
+      dockerfile: Dockerfile
+    container_name: webssh
+    ports:
+      - "8031:8899"
+    volumes:
+      - ./data/.GoWebSSH:/root/.GoWebSSH
+      - ./data/GoSSH.log:/home/webssh/GoSSH.log
+      - /etc/localtime:/etc/localtime
+    restart: always
