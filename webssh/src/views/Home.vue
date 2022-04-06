@@ -45,7 +45,7 @@
 
             <el-button type="primary" @click="newHost" :icon="CirclePlus">新建</el-button>
 
-            <el-button type="primary" @click="toManage" :icon="Coin">管理</el-button>
+            <!--<el-button type="primary" @click="toManage" :icon="Coin">管理</el-button>-->
 
             <el-dialog
               :title="data.mode == 0 ? '新增主机' : '更新主机'"
