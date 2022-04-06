@@ -14,4 +14,5 @@ sudo docker-compose stop webssh
 sudo docker-compose rm webssh
 
 sudo docker exec -it webssh bash
+sudo docker logs -f webssh
 ```
