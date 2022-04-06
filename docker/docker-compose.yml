@@ -9,6 +9,6 @@ services:
       - "8031:8899"
     volumes:
       - ./data/.GoWebSSH:/root/.GoWebSSH
-      - ./data/webssh:/home/webssh
+      - ./data/webssh/log:/home/webssh/log
       - /etc/localtime:/etc/localtime
     restart: always

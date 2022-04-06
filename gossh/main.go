@@ -290,7 +290,7 @@ func (l *Log) SetLogLevel(level LogLevel) {
 }
 
 // 日志功能
-var logger = NewLogger("GoSSH", logLevel, true, true)
+var logger = NewLogger("/home/webssh/log/GoSSH", logLevel, true, true)
 
 /**
 // 是否输出到控制台
