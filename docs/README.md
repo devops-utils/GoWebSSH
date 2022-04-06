@@ -5,6 +5,7 @@ npm run build
 
 sudo docker run -ti --volume="$(pwd)":/webssh --rm node:16 bash
 sudo docker run -ti --volume="$(pwd)":/webssh --rm node:14 bash
+cd /webssh
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install
 npm run build
@@ -25,4 +26,8 @@ sudo docker-compose rm webssh
 
 sudo docker exec -it webssh bash
 sudo docker logs -f webssh
+```
+
+```shell
+https://nodejs.org/zh-cn/docs/guides/nodejs-docker-webapp/
 ```
