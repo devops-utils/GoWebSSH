@@ -3,6 +3,11 @@ cd webssh
 cnpm install
 npm run build
 
+sudo docker run -ti --volume="$(pwd)":/webssh --rm node:16 bash
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+cnpm install
+npm run build
+
 cd gossh
 go build
 # ./gossh
