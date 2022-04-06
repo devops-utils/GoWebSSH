@@ -248,9 +248,6 @@
           </el-button-group>
         </el-col>
         <el-col :span="6"></el-col>
-        <el-col :span="6" style="text-align: right">
-          <el-button type="success" @click="toGitHub">GitHub</el-button>
-        </el-col>
       </el-row>
     </el-header>
     <div>
@@ -1006,13 +1003,6 @@ function reportConnectStatus() {
  */
 function toManage() {
   window.open("./#/manage", "_blank");
-}
-
-/**
- * 跳转到GitHub
- */
-function toGitHub() {
-  window.open("https://github.com/o8oo8o/GoWebSSH", "_blank");
 }
 
 
