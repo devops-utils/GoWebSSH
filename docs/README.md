@@ -36,6 +36,7 @@ sqlite3 docker/data/.GoWebSSH/GoWebSSH.db
 sudo docker pull myide/opencmdb:v1
 sudo docker run -itd --name op1 --network host myide/opencmdb:v1
 sudo docker run -itd --name op1 myide/opencmdb:v1
+sudo docker run -it --rm --name op1 myide/opencmdb:v1
 ```
 
 ```
