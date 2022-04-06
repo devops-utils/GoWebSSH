@@ -1,4 +1,8 @@
 ```shell
+cd webssh
+cnpm install
+npm run build
+
 cd gossh
 go build
 # ./gossh

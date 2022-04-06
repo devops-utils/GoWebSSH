@@ -36,7 +36,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         // 代理目标地址
-        target: "http://127.0.0.1:8899",
+        target: "http://49.232.6.131:8031",
 
         // websocket 
         ws: true,
