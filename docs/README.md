@@ -6,6 +6,8 @@ go build
 cd ../docker
 cp ../gossh/gossh webssh
 
+sudo docker-compose build webssh
+
 sudo docker-compose up webssh
 sudo docker-compose up -d webssh
 sudo docker-compose stop webssh
