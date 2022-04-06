@@ -30,6 +30,12 @@ sudo docker logs -f webssh
 
 sqlite3 .GoWebSSH/GoWebSSH.db
 sqlite3 docker/data/.GoWebSSH/GoWebSSH.db
+
+/usr/bin/coreutils --coreutils-prog-shebang=tail /usr/bin/tail -f log.txt
+```
+
+```
+coreutils
 ```
 
 ```shell
