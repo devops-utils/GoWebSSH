@@ -1,0 +1,49 @@
+npm run build
+
+> webssh@2.0.0 build
+> vue-tsc --noEmit && vite build
+
+vite v2.8.4 building for production...
+✓ 8 modules transformed.
+[vite:resolve] EACCES: permission denied, stat '/root/.node_modules/plugin-vue:export-helper'
+error during build:
+Error: EACCES: permission denied, stat '/root/.node_modules/plugin-vue:export-helper'
+    at Object.statSync (node:fs:1536:3)
+    at isDirectory (/webssh/node_modules/resolve/lib/sync.js:31:23)
+    at loadNodeModulesSync (/webssh/node_modules/resolve/lib/sync.js:200:17)
+    at Function.resolveSync [as sync] (/webssh/node_modules/resolve/lib/sync.js:107:17)
+    at resolveFrom (/webssh/node_modules/vite/dist/node/chunks/dep-971d9e33.js:2077:29)
+    at resolvePackageData (/webssh/node_modules/vite/dist/node/chunks/dep-971d9e33.js:28938:19)
+    at /webssh/node_modules/vite/dist/node/chunks/dep-971d9e33.js:29319:15
+    at Array.find (<anonymous>)
+    at tryNodeResolve (/webssh/node_modules/vite/dist/node/chunks/dep-971d9e33.js:29318:44)
+    at Object.resolveId (/webssh/node_modules/vite/dist/node/chunks/dep-971d9e33.js:29150:28)
+[!] Error: unfinished hook action(s) on exit:
+(vite:esbuild) transform "/webssh/src/router/index.ts"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/defaults.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/directives/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/hooks/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/tokens/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/make-installer.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/affix/src/affix.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/affix/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/alert/src/alert.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/alert/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/autocomplete/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/avatar/src/avatar.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/avatar/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/backtop/src/backtop.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/backtop/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/badge/src/badge.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/badge/index.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/breadcrumb/src/breadcrumb.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/breadcrumb/src/breadcrumb-item.mjs"
+(vite:load-fallback) load "/webssh/node_modules/element-plus/es/components/breadcrumb/index.mjs"
+
+npm notice
+npm notice New minor version of npm available! 8.1.2 -> 8.6.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.6.0
+npm notice Run npm install -g npm@8.6.0 to update!
+npm notice
+root@4dd21c
