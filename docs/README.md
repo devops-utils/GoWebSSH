@@ -32,6 +32,10 @@ sqlite3 .GoWebSSH/GoWebSSH.db
 sqlite3 docker/data/.GoWebSSH/GoWebSSH.db
 
 /usr/bin/coreutils --coreutils-prog-shebang=tail /usr/bin/tail -f log.txt
+
+sudo docker pull myide/opencmdb:v1
+sudo docker run -itd --name op1 --network host opencmdb:v1
+sudo docker run -itd --name op1 opencmdb:v1
 ```
 
 ```
