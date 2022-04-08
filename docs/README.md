@@ -11,6 +11,9 @@ cd /webssh
 npm install
 npm run build
 
+cd ../
+./update.sh
+
 cd gossh
 go build
 # ./gossh
