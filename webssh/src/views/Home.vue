@@ -803,6 +803,7 @@ function getSessionId(host: Host): Promise<string> {
   fm.append("name", host.name);
   fm.append("address", host.address);
   fm.append("user", host.user);
+  // process pwd
   fm.append("pwd", host.pwd);
   fm.append("port", String(host.port));
   fm.append("shell", host.shell);

@@ -9,6 +9,7 @@ cd /webssh
 # npm install -g cnpm --registry=https://registry.npm.taobao.org
 # cnpm install
 npm install
+npm install crypto-js --save-dev
 npm run build
 
 cd ../
