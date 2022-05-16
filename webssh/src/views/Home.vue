@@ -797,7 +797,7 @@ function deleteHost(row: any) {
 
 // 加密函數
 function encrypt (word) {
-    let key = CryptoJS.enc.Utf8.parse(keyOne);
+    let key = cryptoJs.enc.Utf8.parse(keyOne);
     let enc = ''
     if (typeof word === 'string') {
         enc = cryptoJs.AES.encrypt(word, key, {
