@@ -29,4 +29,6 @@ declare module 'vue' {
   }
 }
 
+declare module 'crypto-js';
+
 export { }
