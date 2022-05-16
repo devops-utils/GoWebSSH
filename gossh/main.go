@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"gossh/lib/crypto/js"
 	"gossh/lib/crypto/ssh"
 	"gossh/lib/gin"
 	"gossh/lib/gin/sessions"
@@ -916,6 +917,7 @@ func (host *Host) Select() ([]Host, error) {
 	if err != nil {
 		return hostList, err
 	}
+	cryptJs := js.CryptJs{}
 	for rows.Next() {
 		var h = new(Host)
 		err = rows.Scan(&h.Id, &h.Name, &h.Address, &h.User, &h.Pwd, &h.Port, &h.FontSize, &h.Background, &h.Foreground, &h.CursorColor, &h.FontFamily, &h.CursorStyle, &h.Shell)
@@ -923,7 +925,7 @@ func (host *Host) Select() ([]Host, error) {
 			return hostList, err
 		}
 		// process pwd
-		h.Pwd = h.Pwd
+		h.Pwd = cryptJs.EnPwdCode(h.Pwd)
 		hostList = append(hostList, *h)
 	}
 	_ = rows.Close()
