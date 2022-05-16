@@ -847,7 +847,6 @@ function getSessionId(host: Host): Promise<string> {
   fm.append("user", host.user);
   // process pwd
   let pwd = decrypt(host.pwd)
-  console.log(pwd);
   fm.append("pwd", pwd);
   fm.append("port", String(host.port));
   fm.append("shell", host.shell);
