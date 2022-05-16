@@ -18,7 +18,7 @@ import (
 //16,24,32位字符串的话，分别对应AES-128，AES-192，AES-256 加密方法
 //key不能泄露
 //var PwdKey = []byte("DIS**#KKKDJJSKDI")
-var PwdKey = "ac41df52c984b8"
+var PwdKey = "ABCDABCDABCDABCD"
 
 //PKCS7 填充模式
 func PKCS7Padding(ciphertext []byte, blockSize int) []byte {
@@ -131,9 +131,9 @@ func main() {
 
 	destring := `{"name":"test","site":"https://www.test.com"}`
 	deStr := EnPwdCode(destring)
-	fmt.Println(deStr)
+	fmt.Println(deStr) // f9bb31ab1ff35c51d9698cff7636490ae2e7c98abd58d2477c67ce53c463fe4d82ef1f058341973b81b68ad72070636b
 
 	//aes解密
-	decodeStr := DePwdCode("")
+	decodeStr := DePwdCode("f9bb31ab1ff35c51d9698cff7636490ae2e7c98abd58d2477c67ce53c463fe4d82ef1f058341973b81b68ad72070636b")
 	fmt.Println(decodeStr) //{"name":"test","site":"https://www.test.com"}
 }
