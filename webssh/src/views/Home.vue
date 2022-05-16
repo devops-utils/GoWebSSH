@@ -815,12 +815,12 @@ function encrypt (word: any) {
             padding: cryptoJs.pad.Pkcs7
         })
     }
-    let encResult = enc.ciphertext.toString()
+    let encResult = enc?.ciphertext.toString()
     return encResult
 }
 
 // 解密函數
-function decrypt (encryptedDataStr: String) {
+function decrypt (encryptedDataStr: string) {
     let key = cryptoJs.enc.Utf8.parse(keyOne);
     let encryptedHexStr = cryptoJs.enc.Hex.parse(encryptedDataStr);
     // console.log("解密前hex：" + encryptedHexStr);
