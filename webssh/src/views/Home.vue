@@ -344,7 +344,7 @@ import { ElMessage, ElPopover } from "element-plus";
 import { Router, useRouter } from "vue-router";
 import { FolderOpened, Files, Bottom, Upload, Menu, CirclePlus, Coin, Sort } from '@element-plus/icons-vue'
 import cryptoJs from 'crypto-js'
-let keyOne = 'ac41df52c984b8'
+let keyOne = 'FJLASFDJL;ADJFLD'
 let route: Router;
 
 enum Mode {

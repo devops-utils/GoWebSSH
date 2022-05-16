@@ -16,7 +16,7 @@ import (
 //16,24,32位字符串的话，分别对应AES-128，AES-192，AES-256 加密方法
 //key不能泄露
 //var PwdKey = []byte("DIS**#KKKDJJSKDI")
-var PwdKey = "ac41df52c984b8"
+var PwdKey = "FJLASFDJL;ADJFLD"
 
 //PKCS7 填充模式
 func PKCS7Padding(ciphertext []byte, blockSize int) []byte {
