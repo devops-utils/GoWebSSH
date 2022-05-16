@@ -922,6 +922,8 @@ func (host *Host) Select() ([]Host, error) {
 		if err != nil {
 			return hostList, err
 		}
+		// process pwd
+		h.Pwd = h.Pwd
 		hostList = append(hostList, *h)
 	}
 	_ = rows.Close()

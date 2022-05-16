@@ -797,11 +797,12 @@ function deleteHost(row: any) {
 
 // 加密函數
 function encrypt (word) {
-    let key = cryptoJs.enc.Hex.parse(keyOne)
+    let key = CryptoJS.enc.Utf8.parse(keyOne);
     let enc = ''
     if (typeof word === 'string') {
         enc = cryptoJs.AES.encrypt(word, key, {
             // iv: iv
+            iv: key,
             mode: cryptoJs.mode.ECB,
             padding: cryptoJs.pad.Pkcs7
         })
@@ -809,6 +810,7 @@ function encrypt (word) {
         let data = JSON.stringify(word)
         enc = cryptoJs.AES.encrypt(data, key, {
             // iv: iv
+            iv: key,
             mode: cryptoJs.mode.ECB,
             padding: cryptoJs.pad.Pkcs7
         })
@@ -818,14 +820,19 @@ function encrypt (word) {
 }
 
 // 解密函數
-function decrypt (word) {
-    let key = cryptoJs.enc.Hex.parse(keyOne)
-    let dec = cryptoJs.AES.decrypt(cryptoJs.format.Hex.parse(word), key, {
+function decrypt (encryptedDataStr) {
+    let key = CryptoJS.enc.Utf8.parse(keyOne);
+    let encryptedHexStr = CryptoJS.enc.Hex.parse(encryptedDataStr);
+    // console.log("解密前hex：" + encryptedHexStr);
+    let encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+    // console.log("解密前：" + encryptedBase64Str);
+    let decryptedData = cryptoJs.AES.decrypt(encryptedBase64Str, key, {
         // vi: vi
-        mode: cryptoJs.mode.ECB,
+        iv: key,
+        mode: cryptoJs.mode.CBC,
         padding: cryptoJs.pad.Pkcs7
     })
-    let decData = cryptoJs.enc.Utf8.stringify(dec)
+    let decData = cryptoJs.enc.Utf8.stringify(decryptedData)
     return decData
 }
 
