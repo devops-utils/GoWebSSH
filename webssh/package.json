@@ -16,8 +16,7 @@
     "vue-router": "^4.0.12",
     "xterm": "^4.17.0",
     "xterm-addon-attach": "^0.6.0",
-    "xterm-addon-fit": "^0.5.0",
-    "crypto-js": "^4.1.1"
+    "xterm-addon-fit": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",
@@ -26,6 +25,7 @@
     "unplugin-auto-import": "^0.6.1",
     "unplugin-vue-components": "^0.17.21",
     "vite": "^2.8.0",
-    "vue-tsc": "^0.29.8"
+    "vue-tsc": "^0.29.8",
+    "crypto-js": "^4.1.1"
   }
 }

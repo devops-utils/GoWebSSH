@@ -796,9 +796,9 @@ function deleteHost(row: any) {
 }
 
 // 加密函數
-function encrypt (word) {
+function encrypt (word: any) {
     let key = cryptoJs.enc.Utf8.parse(keyOne);
-    let enc = ''
+    let enc;
     if (typeof word === 'string') {
         enc = cryptoJs.AES.encrypt(word, key, {
             // iv: iv
@@ -820,7 +820,7 @@ function encrypt (word) {
 }
 
 // 解密函數
-function decrypt (encryptedDataStr) {
+function decrypt (encryptedDataStr: String) {
     let key = cryptoJs.enc.Utf8.parse(keyOne);
     let encryptedHexStr = cryptoJs.enc.Hex.parse(encryptedDataStr);
     // console.log("解密前hex：" + encryptedHexStr);
