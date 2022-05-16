@@ -4,109 +4,110 @@ import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
-	"encoding/hex"
+	"encoding/base64"
 	"errors"
 	"fmt"
 )
 
-//参考文档
-//http://www.topgoer.com/%E5%85%B6%E4%BB%96/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86.html
-//高级加密标准（Adevanced Encryption Standard ,AES）
+//加密过程：
+//  1、处理数据，对数据进行填充，采用PKCS7（当密钥长度不够时，缺几位补几个几）的方式。
+//  2、对数据进行加密，采用AES加密方法中CBC加密模式
+//  3、对得到的加密数据，进行base64加密，得到字符串
+// 解密过程相反
 
 //16,24,32位字符串的话，分别对应AES-128，AES-192，AES-256 加密方法
 //key不能泄露
-//var PwdKey = []byte("DIS**#KKKDJJSKDI")
-var PwdKey = "ac41df52c984b8"
+var PwdKey = []byte("ac41df52c984b8")
 
-//PKCS7 填充模式
-func PKCS7Padding(ciphertext []byte, blockSize int) []byte {
-	padding := blockSize - len(ciphertext)%blockSize
-	//Repeat()函数的功能是把切片[]byte{byte(padding)}复制padding个，然后合并成新的字节切片返回
-	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
-	return append(ciphertext, padtext...)
+//pkcs7Padding 填充
+func pkcs7Padding(data []byte, blockSize int) []byte {
+	//判断缺少几位长度。最少1，最多 blockSize
+	padding := blockSize - len(data)%blockSize
+	//补足位数。把切片[]byte{byte(padding)}复制padding个
+	padText := bytes.Repeat([]byte{byte(padding)}, padding)
+	return append(data, padText...)
 }
 
-//填充的反向操作，删除填充字符串
-func PKCS7UnPadding1(origData []byte) ([]byte, error) {
-	//获取数据长度
-	length := len(origData)
+//pkcs7UnPadding 填充的反向操作
+func pkcs7UnPadding(data []byte) ([]byte, error) {
+	length := len(data)
 	if length == 0 {
 		return nil, errors.New("加密字符串错误！")
-	} else {
-		//获取填充字符串长度
-		unpadding := int(origData[length-1])
-		//截取切片，删除填充字节，并且返回明文
-		return origData[:(length - unpadding)], nil
 	}
+	//获取填充的个数
+	unPadding := int(data[length-1])
+	return data[:(length - unPadding)], nil
 }
 
-//实现加密
-func AesEcrypt(origData []byte, key []byte) ([]byte, error) {
-	//创建加密算法实例
+//AesEncrypt 加密
+func AesEncrypt(data []byte, key []byte) ([]byte, error) {
+	//创建加密实例
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return nil, err
+	}
+	//判断加密快的大小
+	blockSize := block.BlockSize()
+	//填充
+	encryptBytes := pkcs7Padding(data, blockSize)
+	//初始化加密数据接收切片
+	crypted := make([]byte, len(encryptBytes))
+	//使用cbc加密模式
+	blockMode := cipher.NewCBCEncrypter(block, key[:blockSize])
+	//执行加密
+	blockMode.CryptBlocks(crypted, encryptBytes)
+	return crypted, nil
+}
+
+//AesDecrypt 解密
+func AesDecrypt(data []byte, key []byte) ([]byte, error) {
+	//创建实例
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
 	//获取块的大小
 	blockSize := block.BlockSize()
-	//对数据进行填充，让数据长度满足需求
-	origData = PKCS7Padding(origData, blockSize)
-	//采用AES加密方法中CBC加密模式
-	blocMode := cipher.NewCBCEncrypter(block, key[:blockSize])
-	crypted := make([]byte, len(origData))
-	//执行加密
-	blocMode.CryptBlocks(crypted, origData)
+	//使用cbc
+	blockMode := cipher.NewCBCDecrypter(block, key[:blockSize])
+	//初始化解密数据接收切片
+	crypted := make([]byte, len(data))
+	//执行解密
+	blockMode.CryptBlocks(crypted, data)
+	//去除填充
+	crypted, err = pkcs7UnPadding(crypted)
+	if err != nil {
+		return nil, err
+	}
 	return crypted, nil
 }
 
-//实现解密
-func AesDeCrypt(cypted []byte, key []byte) (string, error) {
-	//创建加密算法实例
-	block, err := aes.NewCipher(key)
+//EncryptByAes Aes加密 后 base64 再加
+func EncryptByAes(data []byte) (string, error) {
+	res, err := AesEncrypt(data, PwdKey)
 	if err != nil {
 		return "", err
 	}
-	//获取块大小
-	blockSize := block.BlockSize()
-	//创建加密客户端实例
-	blockMode := cipher.NewCBCDecrypter(block, key[:blockSize])
-	origData := make([]byte, len(cypted))
-	//这个函数也可以用来解密
-	blockMode.CryptBlocks(origData, cypted)
-	//去除填充字符串
-	origData, err = PKCS7UnPadding1(origData)
-	if err != nil {
-		return "", err
-	}
-	return string(origData), err
+	return base64.StdEncoding.EncodeToString(res), nil
 }
 
-//加密base64
-func EnPwdCode(pwdStr string) string {
-	pwd := []byte(pwdStr)
-	result, err := AesEcrypt(pwd, []byte(PwdKey))
+//DecryptByAes Aes 解密
+func DecryptByAes(data string) ([]byte, error) {
+	dataByte, err := base64.StdEncoding.DecodeString(data)
 	if err != nil {
-		return ""
+		return nil, err
 	}
-	return hex.EncodeToString(result)
-}
-
-//解密
-func DePwdCode(pwd string) string {
-	temp, _ := hex.DecodeString(pwd)
-	//执行AES解密
-	res, _ := AesDeCrypt(temp, []byte(PwdKey))
-	return res
+	return AesDecrypt(dataByte, PwdKey)
 }
 
 func main() {
 	//aes加密
 	fmt.Println("test")
-	destring := `{"name":"test","site":"https://www.test.com"}`
-	deStr := EnPwdCode(destring)
+	destring := []byte("test")
+	deStr, _ := EncryptByAes(destring)
 	fmt.Println(deStr)
 
 	//aes解密
-	decodeStr := DePwdCode("")
+	decodeStr, _ := DecryptByAes("")
 	fmt.Println(decodeStr) //{"name":"test","site":"https://www.test.com"}
 }
