@@ -7,6 +7,8 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"gossh/test/helpers"
+	"time"
 )
 
 //参考文档
@@ -99,9 +101,34 @@ func DePwdCode(pwd string) string {
 	return res
 }
 
+func testAes() {
+	//加密
+	str, _ := helpers.EncryptByAes([]byte("test"))
+	//解密
+	str1, _ := helpers.DecryptByAes(str)
+	//打印
+	fmt.Printf(" 加密：%v\n 解密：%s\n ",
+		str, str1,
+	)
+}
+
+//测试速度
+func testAesTime() {
+	startTime := time.Now()
+	count := 1000000
+	for i := 0; i < count; i++ {
+		str, _ := helpers.EncryptByAes([]byte("test"))
+		helpers.DecryptByAes(str)
+	}
+	fmt.Printf("%v次 - %v", count, time.Since(startTime))
+}
+
 func main() {
 	//aes加密
 	fmt.Println("test")
+
+	testAes()
+
 	destring := `{"name":"test","site":"https://www.test.com"}`
 	deStr := EnPwdCode(destring)
 	fmt.Println(deStr)
