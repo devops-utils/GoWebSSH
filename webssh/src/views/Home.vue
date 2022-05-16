@@ -821,10 +821,10 @@ function encrypt (word) {
 
 // 解密函數
 function decrypt (encryptedDataStr) {
-    let key = CryptoJS.enc.Utf8.parse(keyOne);
-    let encryptedHexStr = CryptoJS.enc.Hex.parse(encryptedDataStr);
+    let key = cryptoJs.enc.Utf8.parse(keyOne);
+    let encryptedHexStr = cryptoJs.enc.Hex.parse(encryptedDataStr);
     // console.log("解密前hex：" + encryptedHexStr);
-    let encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+    let encryptedBase64Str = cryptoJs.enc.Base64.stringify(encryptedHexStr);
     // console.log("解密前：" + encryptedBase64Str);
     let decryptedData = cryptoJs.AES.decrypt(encryptedBase64Str, key, {
         // vi: vi
