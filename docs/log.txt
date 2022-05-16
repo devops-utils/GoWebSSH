@@ -47,3 +47,10 @@ npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.6.0
 npm notice Run npm install -g npm@8.6.0 to update!
 npm notice
 root@4dd21c
+
+npm run build
+src/views/Home.vue:346:22 - error TS7016: Could not find a declaration file for module 'crypto-js'. '/webssh/node_modules/crypto-js/index.js' implicitly has
+an 'any' type.
+  Try `npm i --save-dev @types/crypto-js` if it exists or add a new declaration (.d.ts) file containing `declare module 'crypto-js';`
+
+346 import cryptoJs from 'crypto-js'
