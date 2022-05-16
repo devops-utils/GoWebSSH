@@ -45,6 +45,7 @@ sudo docker run -it --rm --name op1 myide/opencmdb:v1
 
 ```
 coreutils
+js 加密
 ```
 
 ```shell

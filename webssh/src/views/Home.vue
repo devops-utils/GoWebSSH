@@ -343,7 +343,8 @@ import { FitAddon } from "xterm-addon-fit";
 import { ElMessage, ElPopover } from "element-plus";
 import { Router, useRouter } from "vue-router";
 import { FolderOpened, Files, Bottom, Upload, Menu, CirclePlus, Coin, Sort } from '@element-plus/icons-vue'
-
+import cryptoJs from 'crypto-js'
+let keyOne = 'ac41df52c984b8'
 let route: Router;
 
 enum Mode {
@@ -794,6 +795,40 @@ function deleteHost(row: any) {
     });
 }
 
+// 加密函數
+function encrypt (word) {
+    let key = cryptoJs.enc.Hex.parse(keyOne)
+    let enc = ''
+    if (typeof word === 'string') {
+        enc = cryptoJs.AES.encrypt(word, key, {
+            // iv: iv
+            mode: cryptoJs.mode.ECB,
+            padding: cryptoJs.pad.Pkcs7
+        })
+    } else if (typeof word === 'object') {
+        let data = JSON.stringify(word)
+        enc = cryptoJs.AES.encrypt(data, key, {
+            // iv: iv
+            mode: cryptoJs.mode.ECB,
+            padding: cryptoJs.pad.Pkcs7
+        })
+    }
+    let encResult = enc.ciphertext.toString()
+    return encResult
+}
+
+// 解密函數
+function decrypt (word) {
+    let key = cryptoJs.enc.Hex.parse(keyOne)
+    let dec = cryptoJs.AES.decrypt(cryptoJs.format.Hex.parse(word), key, {
+        // vi: vi
+        mode: cryptoJs.mode.ECB,
+        padding: cryptoJs.pad.Pkcs7
+    })
+    let decData = cryptoJs.enc.Utf8.stringify(dec)
+    return decData
+}
+
 /**
  * 获取会话session_id
  */
@@ -804,7 +839,9 @@ function getSessionId(host: Host): Promise<string> {
   fm.append("address", host.address);
   fm.append("user", host.user);
   // process pwd
-  fm.append("pwd", host.pwd);
+  let pwd = decrypt(host.pwd)
+  console.log(pwd);
+  fm.append("pwd", pwd);
   fm.append("port", String(host.port));
   fm.append("shell", host.shell);
 
